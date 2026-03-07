@@ -1,0 +1,86 @@
+.container {
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.bottomGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap:wrap;
+}
+
+.inputGroup {
+    flex: 1;
+    display:flex;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+    padding: 8px 12px;
+    width: 100%;
+    gap: 6px;
+}
+
+.taskInput {
+    flex: 1;
+    font-size: 0.90rem;
+}
+
+.priorityInput {
+    font-size: 0.8rem;
+}
+
+.taskInput, .priorityInput{
+    border:none;
+    color: #aaa;
+    background: transparent;
+    outline: none;
+}
+
+.inputGroup:has(.taskInput:focus) {
+    border-color: #aaa;
+}
+
+.priorityInput {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnPrimary {
+    padding:12px 22px;
+    width: 100%;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.90rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.btnPrimary:hover {
+  background-color: #333;
+}
+
+.error {
+    font-size: 0.7rem;
+    margin-left: 0.3rem;
+    color: red;
+}
+
+@media only screen and (min-width: 500px) {
+    .container {
+        flex-wrap: nowrap;
+    }
+
+    .inputGroup {
+        width: auto;
+    }
+
+    .btnPrimary {
+        width: auto;
+    }
+}
