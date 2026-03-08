@@ -29,7 +29,7 @@ export default function TaskManager(): JSX.Element {
     };
 
     const filterBySearchTerm = (tasks: Task[], searchTerm: string) => {
-        return (!searchTerm) ? tasks : tasks.filter(task => task.name.includes(searchTerm.trimEnd().trimStart()));
+        return (!searchTerm) ? tasks : tasks.filter(task => task.name.includes(searchTerm.trim()));
     }
 
     return (
