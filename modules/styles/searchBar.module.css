@@ -1,0 +1,44 @@
+.searchBar {
+    flex: 1;
+    padding: 6px 6px;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+.clearBtn {
+    cursor: pointer;
+    padding: 8px 6px;
+    border-radius: 6px;
+    border: none;
+}
+
+.clearBtn:active {
+    color: gray;
+}
+
+.container {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+    padding: 2px 0;
+    border-bottom: 1px solid #777;
+    position: relative;
+    width: 100%;
+}
+
+.container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #111;
+    transition: all 0.3s ease;
+}
+
+.container:hover::after {
+    width: 100%;
+    left: 0;
+}
