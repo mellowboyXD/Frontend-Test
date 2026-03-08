@@ -1,8 +1,7 @@
-'use client'
-
 import { useEffect, useRef, useState } from "react";
-import styles from "../styles/taskCard.module.css"
 import { Task } from "../utils/usefulTypes";
+
+import styles from "../styles/taskCard.module.css"
 
 interface TaskCardProps {
     task: Task;

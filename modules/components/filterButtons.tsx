@@ -1,8 +1,7 @@
-'use client'
-
-import { useEffect, useState } from 'react';
-import styles from '../styles/filterButtons.module.css'
 import { FilterOptions, Task } from '../utils/usefulTypes';
+import useMounted from '../utils/useMounted';
+
+import styles from '../styles/filterButtons.module.css'
 
 interface FilterProps {
     tasks: Task[];
@@ -12,12 +11,7 @@ interface FilterProps {
 
 export default function FilterButtons(props: FilterProps) {
     const tasks = props.tasks.filter(t => t.isChecked == false);
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        /* component has successfully mounted on the client */
-        setMounted(true);
-    }, [])
+    const mounted = useMounted();
 
     return (
         <div className={styles.container}>

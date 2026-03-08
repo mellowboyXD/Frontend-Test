@@ -1,8 +1,8 @@
-'use client'
-
-import { Task } from "../utils/usefulTypes";
 import NoTasks from "./noTasks";
 import TaskCard from "./taskCard";
+
+import { Task } from "../utils/usefulTypes";
+import useMounted from "../utils/useMounted";
 
 import styles from '../styles/taskList.module.css'
 
@@ -14,6 +14,7 @@ interface TaskListProps {
 export default function TaskList(props: TaskListProps) {
     const tasks = props.tasks;
     const setTasks = props.setTasks;
+    const mounted = useMounted();
 
     const handleCompleteTask = (id: string) => {
         setTasks(tasks.map(currentTask =>
@@ -37,10 +38,10 @@ export default function TaskList(props: TaskListProps) {
 
     return (
         <ul className={styles.container}>
-            {(tasks.length == 0) ? <NoTasks /> : <></>}
+            {!mounted || (tasks.length == 0) ? <NoTasks /> : <></>}
 
             {/* render active tasks first */}
-            {tasks.map(task => (
+            {mounted && tasks.map(task => (
                 !task.isChecked
                     ? <li key={task.id}>
                         <TaskCard
@@ -50,11 +51,11 @@ export default function TaskList(props: TaskListProps) {
                             editTask={handleEditTask}
                         />
                     </li>
-                    : ''
+                    : null
             ))}
 
             {/* then render completed tasks */}
-            {tasks.map(task => (
+            {mounted && tasks.map(task => (
                 task.isChecked
                     ? <li key={task.id}>
                         <TaskCard
@@ -64,7 +65,7 @@ export default function TaskList(props: TaskListProps) {
                             editTask={handleEditTask}
                         />
                     </li>
-                    : ''
+                    : null
             ))}
         </ul>
     );

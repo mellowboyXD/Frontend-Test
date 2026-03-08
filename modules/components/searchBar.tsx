@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+
 import styles from '../styles/searchBar.module.css'
 
 interface SearchBarProps {

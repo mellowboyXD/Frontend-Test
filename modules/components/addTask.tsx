@@ -1,9 +1,8 @@
-'use client'
-
 import { useRef } from 'react';
-import styles from '../styles/addTask.module.css'
 
 import { Task } from '../utils/usefulTypes';
+
+import styles from '../styles/addTask.module.css'
 
 interface AddTaskProps {
     tasks: Task[];
@@ -25,7 +24,7 @@ export default function AddTask(props: AddTaskProps) {
             errorMsgRef.current!.innerText = '';
         }
 
-        // reset the inputs
+        /* reset the inputs */
         taskNameRef.current.value = '';
         taskPriorityRef.current.value = 'Low';
 
