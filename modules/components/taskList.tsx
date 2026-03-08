@@ -17,10 +17,10 @@ export default function TaskList(props: TaskListProps) {
     const mounted = useMounted();
 
     const handleCompleteTask = (id: string) => {
-        setTasks(tasks.map(currentTask =>
-            currentTask.id === id
-                ? { ...currentTask, isChecked: !currentTask.isChecked }
-                : currentTask
+        setTasks(tasks.map(task =>
+            task.id === id
+                ? { ...task, isChecked: !task.isChecked }
+                : task
         ));
     };
 
@@ -38,35 +38,20 @@ export default function TaskList(props: TaskListProps) {
 
     return (
         <ul className={styles.container}>
-            {!mounted || (tasks.length == 0) ? <NoTasks /> : <></>}
-
-            {/* render active tasks first */}
-            {mounted && tasks.map(task => (
-                !task.isChecked
-                    ? <li key={task.id}>
-                        <TaskCard
-                            task={task}
-                            completeTask={handleCompleteTask}
-                            deleteTask={handleDeleteTask}
-                            editTask={handleEditTask}
-                        />
-                    </li>
-                    : null
-            ))}
-
-            {/* then render completed tasks */}
-            {mounted && tasks.map(task => (
-                task.isChecked
-                    ? <li key={task.id}>
-                        <TaskCard
-                            task={task}
-                            completeTask={handleCompleteTask}
-                            deleteTask={handleDeleteTask}
-                            editTask={handleEditTask}
-                        />
-                    </li>
-                    : null
-            ))}
+            {!mounted || (tasks.length == 0)
+                ? <NoTasks />
+                : [...tasks].sort((a, b) => Number(a.isChecked) - Number(b.isChecked))
+                    .map(task => (
+                        <li key={task.id}>
+                            <TaskCard
+                                task={task}
+                                completeTask={handleCompleteTask}
+                                deleteTask={handleDeleteTask}
+                                editTask={handleEditTask}
+                            />
+                        </li>
+                    ))
+            }
         </ul>
     );
 }

@@ -16,6 +16,11 @@ export default function TaskCard(props: TaskCardProps): JSX.Element {
     const errorElementRef = useRef<HTMLSpanElement>(null);
     const taskNameInputRef = useRef<HTMLInputElement>(null);
 
+    useEffect(() => {
+        if (!isEditing)
+            setTask(props.task);
+    }, [props.task])
+
     const handleEdit = () => {
         setIsEditing(true);
     };

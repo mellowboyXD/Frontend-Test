@@ -29,7 +29,7 @@ export default function AddTask(props: AddTaskProps) {
         taskPriorityRef.current.value = 'Low';
 
         const task: Task = {
-            id: String(props.tasks.length),
+            id: crypto.randomUUID(),
             name: name,
             priority: (priority == 'Low') ? 'Low' : (priority == 'Medium') ? 'Medium' : 'High',
             isChecked: false
