@@ -1,4 +1,6 @@
-import { Task } from "../types/usefulTypes";
+'use client'
+
+import { Task } from "../utils/usefulTypes";
 import NoTasks from "./noTasks";
 import TaskCard from "./taskCard";
 

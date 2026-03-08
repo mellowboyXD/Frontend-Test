@@ -6,7 +6,6 @@ export interface Task {
     id: string;
     name: string;
     priority: "Low" | "Medium" | "High";
-    timestamp: number;
     isChecked: boolean;
 };
 

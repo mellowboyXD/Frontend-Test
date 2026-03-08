@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "../styles/taskCard.module.css"
-import { Task } from "../types/usefulTypes";
+import { Task } from "../utils/usefulTypes";
 
 interface TaskCardProps {
     task: Task;

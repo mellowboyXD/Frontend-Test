@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import styles from '../styles/addTask.module.css'
 
-import { Task } from '../types/usefulTypes';
+import { Task } from '../utils/usefulTypes';
 
 interface AddTaskProps {
     tasks: Task[];
@@ -33,7 +33,6 @@ export default function AddTask(props: AddTaskProps) {
             id: String(props.tasks.length),
             name: name,
             priority: (priority == 'Low') ? 'Low' : (priority == 'Medium') ? 'Medium' : 'High',
-            timestamp: Date.now(),
             isChecked: false
         }
 

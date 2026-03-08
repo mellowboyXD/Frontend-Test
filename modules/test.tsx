@@ -6,13 +6,31 @@ import FilterButtons from './components/filterButtons';
 import TaskList from './components/taskList';
 
 import styles from './styles/test.module.css';
-import { FilterOptions, Task } from './types/usefulTypes';
+import { FilterOptions, Task } from './utils/usefulTypes';
+import useLocalStorage from './utils/useLocalStorage';
+import SearchBar from './components/searchBar';
 
 // Your Test Starts Here
 // Ok
 export default function TaskManager(): JSX.Element {
-    const [tasks, setTasks] = useState(new Array<Task>());
+    const [tasks, setTasks] = useLocalStorage('tasks', new Array<Task>());
     const [filter, setFilter] = useState(FilterOptions.ALL);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const filterByStatus = (tasks: Task[], filter: FilterOptions) => {
+        switch (filter) {
+            case FilterOptions.ALL:
+                return tasks;
+            case FilterOptions.ACTIVE:
+                return tasks.filter(task => !task.isChecked);
+            case FilterOptions.COMPLETED:
+                return tasks.filter(task => task.isChecked);
+        }
+    };
+
+    const filterBySearchTerm = (tasks: Task[], searchTerm: string) => {
+        return (!searchTerm) ? tasks : tasks.filter(task => task.name.includes(searchTerm.trimEnd().trimStart()));
+    }
 
     return (
         <div className={styles.container}>
@@ -20,12 +38,8 @@ export default function TaskManager(): JSX.Element {
             <div className={styles.content}>
                 <AddTask tasks={tasks} setTasks={setTasks} />
                 <FilterButtons tasks={tasks} filter={filter} setFilter={setFilter} />
-                <TaskList tasks={
-                    (filter == FilterOptions.ALL)
-                        ? tasks
-                        : (filter == FilterOptions.ACTIVE)
-                            ? tasks.filter(task => task.isChecked == false)
-                            : tasks.filter(task => task.isChecked == true)}
+                <SearchBar setSearchTerm={setSearchTerm} />
+                <TaskList tasks={filterBySearchTerm(filterByStatus(tasks, filter), searchTerm)}
                     setTasks={setTasks} />
             </div>
         </div>
